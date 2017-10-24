@@ -1,10 +1,26 @@
-﻿<#DESCRIPTION
+﻿###########################################################################################
+# Title     :   Database copy through San Snapshot
+# Filename  :   StorgeSnapshot.ps1          
+# Created by:   Sebastian Schlesinger            
+# Date      :   10/06/2017                
+# Version   :   1.0        
+# Update    :   This is the first version
+# E-mail    :   sebastianese@gmail.com
+#####################
+
+
+
+<#DESCRIPTION
    Author: Sebastian Schlesinger 
    Date: 10/6/2017
 			Script that contains 2 functions. 
+            Script was created to satisfy a customer's request to be able to copy a database from one SQL instance (source) to a different one (target). This way data analysis can be performed on the target copy without interrupting the process happening
+            on the source server. This can be accomplished by leveraging a point-in-time (PIT) data copies or SAN snapshot. More from HP:
+            https://www.hpe.com/h20195/v2/GetPDF.aspx/4AA6-4486ENW.pdf
 
-            1.- CreateSnapshot :This will create storage snapshot on the 3PAR storage array for a volume containing a database that is mapped to the Source Server.
-            THe volume will then be mounted and resignatured at the VMware level. THe VMDK on the snap volume will then be mounted on the target server. Finally the database files on the VMDK will be
+
+            1.- CreateSnapshot : This function will create storage snapshot on the 3PAR storage array for a volume containing a database that is mapped to the Source Server.
+            THe volume will then be mounted and resignatured at the VMware level. THe VMDK contained on the resultant snap volume will then be mounted on the target server. Finally the database files on the VMDK will be
             attached to the SQL instance living on the target server.
 
               This function will specifically:
